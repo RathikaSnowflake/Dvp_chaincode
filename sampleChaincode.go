@@ -135,8 +135,8 @@ func (t *Register) Init(stub shim.ChaincodeStubInterface, function string, args 
 // Query the chaincode
 func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	
-	if function == "Register" {
-		return Register(stub, args)
+	if function == "registration" {
+		return registration(stub, args)
 	} 
 	return nil, nil
 }
@@ -144,7 +144,7 @@ func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args
 // Invoke the function in the chaincode
 func (t *Register) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	if function == "registration" {
-		return register(stub,args)
+		return registration(stub,args)
 	} 	
 	fmt.Println("Function not found")
 	return nil, nil
