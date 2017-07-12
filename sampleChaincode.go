@@ -140,7 +140,7 @@ func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args
 
 // Invoke the function in the chaincode
 func (t *Register) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	fmt.Println("Inside invokve for test chaincode")
+	fmt.Println("Inside invokve for test chaincode : "+function)
 	if function == "Registration" {
 		return Registration(stub,args)
 	} 	
