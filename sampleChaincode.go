@@ -138,7 +138,7 @@ func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args
 	//if function == "registration" {
 	//	return registration(stub, args)
 	//} 
-	//return nil, nil
+	return nil, nil
 }
 
 // Invoke the function in the chaincode
