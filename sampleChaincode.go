@@ -2,14 +2,11 @@
 Invoke Methods :
 ****************
 register
-
 Query Methods :
 ****************
 GetTransactionInitDetailsForRefAndMaker
-
 Dependency Methods :
 *********************
-
 GetTransactionInitiationMap
 */
 
@@ -27,12 +24,12 @@ type Register struct {
 }
 
 type register struct {
-	name   		string  `json:"name"`
-   	uname   	string  `json:"uname"`
-    emailid   	string  `json:"emailid"`
-    password   	string  `json:"password"`
-    usertype   	string  `json:"usertype"`
-    acode   	string  `json:"acode"`
+	Name   		string  `json:"name"`
+   	Uname   	string  `json:"uname"`
+    Emailid   	string  `json:"emailid"`
+    Password   	string  `json:"password"`
+    Usertype   	string  `json:"usertype"`
+    Acode   	string  `json:"acode"`
 }
 
 //Global declaration of maps
@@ -63,7 +60,7 @@ func registration(stub shim.ChaincodeStubInterface, args []string) ([]byte, erro
 	GetRegistrationMap(stub)	
 
 	//put register data into map
-	register_map[reg_obj.uname] = reg_obj	
+	register_map[reg_obj.Uname] = reg_obj	
 
 	SetRegistrationMap(stub)	
 	
