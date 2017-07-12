@@ -134,11 +134,11 @@ func (t *Register) Init(stub shim.ChaincodeStubInterface, function string, args 
 
 // Query the chaincode
 func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	fmt.Println("Inside Query for test chaincode")
-	if function == "registration" {
-		return registration(stub, args)
-	} 
-	return nil, nil
+	//fmt.Println("Inside Query for test chaincode")
+	//if function == "registration" {
+	//	return registration(stub, args)
+	//} 
+	//return nil, nil
 }
 
 // Invoke the function in the chaincode
