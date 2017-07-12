@@ -135,8 +135,8 @@ func (t *Register) Init(stub shim.ChaincodeStubInterface, function string, args 
 // Query the chaincode
 func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	
-	if function == "GetTransactionInitDetailsForRefAndMaker" {
-		return GetTransactionInitDetailsForRefAndMaker(stub, args)
+	if function == "Register" {
+		return Register(stub, args)
 	} 
 	return nil, nil
 }
