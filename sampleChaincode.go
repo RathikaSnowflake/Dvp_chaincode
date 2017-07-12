@@ -37,7 +37,7 @@ var register_map map[string]register
 
 //Invoke methods starts here 
 
-func registration(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+func Registration(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 
 	var reg_obj register
 	var err error
@@ -141,8 +141,8 @@ func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args
 // Invoke the function in the chaincode
 func (t *Register) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("Inside invokve for test chaincode")
-	if function == "registration" {
-		return registration(stub,args)
+	if function == "Registration" {
+		return Registration(stub,args)
 	} 	
 	fmt.Println("Function not found")
 	return nil, nil
