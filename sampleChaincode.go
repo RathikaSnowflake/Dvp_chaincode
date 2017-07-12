@@ -40,7 +40,7 @@ var register_map map[string]register
 
 //Invoke methods starts here 
 
-func register(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+func registration(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 
 	var reg_obj register
 	var err error
@@ -143,7 +143,7 @@ func (t *SBITransaction) Query(stub shim.ChaincodeStubInterface, function string
 
 // Invoke the function in the chaincode
 func (t *SBITransaction) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	if function == "register" {
+	if function == "registration" {
 		return register(stub,args)
 	} 	
 	fmt.Println("Function not found")
