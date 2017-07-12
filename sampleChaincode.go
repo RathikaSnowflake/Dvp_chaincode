@@ -19,7 +19,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"time"
+	
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
@@ -127,13 +127,13 @@ func SetRegistrationMap(stub shim.ChaincodeStubInterface) error {
 }
 
 // Init sets up the chaincode
-func (t *SBITransaction) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (t *Register) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("Inside INIT for test chaincode")
 	return nil, nil
 }
 
 // Query the chaincode
-func (t *SBITransaction) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	
 	if function == "GetTransactionInitDetailsForRefAndMaker" {
 		return GetTransactionInitDetailsForRefAndMaker(stub, args)
@@ -142,7 +142,7 @@ func (t *SBITransaction) Query(stub shim.ChaincodeStubInterface, function string
 }
 
 // Invoke the function in the chaincode
-func (t *SBITransaction) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (t *Register) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	if function == "registration" {
 		return register(stub,args)
 	} 	
@@ -151,7 +151,7 @@ func (t *SBITransaction) Invoke(stub shim.ChaincodeStubInterface, function strin
 }
 
 func main() {
-	err := shim.Start(new(SBITransaction))
+	err := shim.Start(new(Register))
 	if err != nil {
 		fmt.Println("Could not start SBITransaction")
 	} else {
