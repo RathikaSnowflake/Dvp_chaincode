@@ -134,7 +134,7 @@ func (t *Register) Init(stub shim.ChaincodeStubInterface, function string, args 
 
 // Query the chaincode
 func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	
+	fmt.Println("Inside Query for test chaincode")
 	if function == "registration" {
 		return registration(stub, args)
 	} 
@@ -143,6 +143,7 @@ func (t *Register) Query(stub shim.ChaincodeStubInterface, function string, args
 
 // Invoke the function in the chaincode
 func (t *Register) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	fmt.Println("Inside invokve for test chaincode")
 	if function == "registration" {
 		return registration(stub,args)
 	} 	
@@ -153,9 +154,9 @@ func (t *Register) Invoke(stub shim.ChaincodeStubInterface, function string, arg
 func main() {
 	err := shim.Start(new(Register))
 	if err != nil {
-		fmt.Println("Could not start SBITransaction")
+		fmt.Println("Could not start Register")
 	} else {
-		fmt.Println("SBITransaction successfully started")
+		fmt.Println("Register successfully started")
 	}
 
 }
