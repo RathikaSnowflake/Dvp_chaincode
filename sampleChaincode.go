@@ -43,7 +43,7 @@ type user struct {
    	Uname   	string  `json:"uname"`
     Emailid   	string  `json:"emailid"`
     Password   	string  `json:"password"`
-    Usertype   	string  `json:"usertype"`
+    UserType   	string  `json:"userType"`
     Acode   	string  `json:"acode"`
     CashBalance string  `json:"cashBalance"`
 }
@@ -105,7 +105,7 @@ func SaveStocks(stub shim.ChaincodeStubInterface, args []string) ([]byte, error)
 	var stock_obj stock
 	var err error
 
-	fmt.Println("Entering saveStocks")
+	fmt.Println("Entering into saveStocks")
 
 	if (len(args) < 1) {
 		fmt.Println("Invalid number of args")
@@ -114,6 +114,8 @@ func SaveStocks(stub shim.ChaincodeStubInterface, args []string) ([]byte, error)
 
 	//unmarshal stock data from UI to "user" struct
 	err = json.Unmarshal([]byte(args[1]), &stock_obj)
+	fmt.Println("args[1] : %v ",args[1]);
+	fmt.Println("stock_obj : %v ",stock_obj);
 	if err != nil {
 		fmt.Printf("Unable to unmarshal user input  : %s\n", err)
 		return nil, nil
@@ -192,7 +194,7 @@ func SetUserMap(stub shim.ChaincodeStubInterface) error {
 func GetStockMap(stub shim.ChaincodeStubInterface) error {
 	var err error
 	var bytesread []byte
-
+	fmt.Println("Entering into GetStockMap");
 	bytesread, err = stub.GetState("StockMap")
 	if err != nil {
 		fmt.Printf("Failed to get UserMap for block chain :%v\n", err)
@@ -321,7 +323,7 @@ func ValidateLogin(stub shim.ChaincodeStubInterface, args []string) ([]byte, err
 	for _, value := range user_map {
 		if value.Uname == username {
 			if value.Password == password {
-				if value.Usertype == usertype{
+				if value.UserType == usertype{
 				res="EXIST";
 				break;
 				}
@@ -340,13 +342,15 @@ func GetAccountList(stub shim.ChaincodeStubInterface) ([]byte, error) {
 	var err error
 	var bytesread []byte
     var list_user_map []user
-
+	
+	fmt.Printf("inside GetAccountList method")
 	bytesread, err = stub.GetState("UserMap")
 	if err != nil {
 		fmt.Printf("Failed to get the UserMap for block chain :%v\n", err)
 		return nil,err
 	}
 
+	fmt.Printf(" bytesread : ",bytesread)
 	if len(bytesread) != 0     {
 		fmt.Printf("UserMap map exists.\n")
         //list_user_map = make(map[string][]user)
@@ -622,8 +626,8 @@ func BuySellStockUpdate(stub shim.ChaincodeStubInterface, uname string,share_nam
 	stock_array=accStock_obj.Share_list     // fetch existing share list for this userid.need to check
 
     var length=len(stock_array)
+    var j=0
     var exist="NOT EXIST"
-    var j=1
     if length>0 {
 	for i := 0; i < length; i++ {
         stock_obj=stock_array[i]
@@ -636,7 +640,7 @@ func BuySellStockUpdate(stub shim.ChaincodeStubInterface, uname string,share_nam
 					stock_obj.Qty=qty
 			} 
 
-            stock_obj.Qty=qty
+            //stock_obj.Qty=qty
 
             stock_array[i]=stock_obj
             exist="EXIST"
@@ -691,11 +695,13 @@ func (t *DVP_empty) Init(stub shim.ChaincodeStubInterface, function string, args
 
 // Query the chaincode
 func (t *DVP_empty) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {	
+	fmt.Println("inside chaincode query : ",function);
+	
 	if function == "validateUsername" {
 		return ValidateUsername(stub, args)
 	} else if function == "ValidateLogin" {
 		return ValidateLogin(stub, args)
-	} else if function == "GetAccountList" {
+	} else if function == "GetAccountList" {fmt.Println("inside chaincode function getaccountlist");
 		return GetAccountList(stub)
 	} else if function == "GetStockList" {
 		return GetStockList(stub)
